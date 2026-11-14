@@ -1,394 +1,804 @@
 
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Fortnite Case</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FORTNITE CASE 2.0</title>
 
 <style>
-body {
-    background: #10152b;
-    color: white;
-    font-family: Arial;
-    text-align: center;
-    padding: 20px;
+@import url('https://fonts.googleapis.com/css2?family=Russo+One&family=Roboto:wght@400;700;900&display=swap');
+
+:root {
+    --blue: #00b7ff;
+    --purple: #9147ff;
+    --bg: #080d1b;
+    --panel: #121d35;
 }
 
-h1 {
-    color: gold;
-    font-size: 36px;
- }
+* {
+    box-sizing: border-box;
+}
 
-.odds {
-    background: #202d4d;
-    padding: 15px;
-    border-radius: 15px;
-    max-width: 500px;
-    margin: 20px auto;
+body {
+    margin: 0;
+    color: white;
+    background:
+        radial-gradient(ellipse at top, #172d56 0%, #080d1b 65%);
+    font-family: Roboto, sans-serif;
+    min-height: 100vh;
+}
+
+header {
+    padding: 22px 15px;
+    text-align: center;
+    background: #101b31;
+    border-bottom: 2px solid var(--blue);
+    box-shadow: 0 0 25px #00aaff33;
+}
+
+.logo {
+    font-family: 'Russo One', sans-serif;
+    font-size: clamp(25px, 5vw, 43px);
+    color: white;
+    text-shadow: 0 0 15px var(--blue);
+}
+
+.logo span {
+    color: var(--blue);
+}
+
+.subtitle {
+    color: #9eb8d8;
+    margin-top: 7px;
+    font-size: 12px;
+    letter-spacing: 3px;
+}
+
+.container {
+    width: min(1100px, 94%);
+    margin: 25px auto;
+}
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 25px;
+}
+
+.stat {
+    background: var(--panel);
+    border: 1px solid #28466d;
+    border-radius: 13px;
+    padding: 17px 8px;
+    text-align: center;
+}
+
+.stat small {
+    display: block;
+    color: #8da9ca;
+    margin-bottom: 8px;
+}
+
+.stat strong {
+    color: #fff;
+    font-size: 22px;
+}
+
+h2 {
+    font-family: 'Russo One', sans-serif;
+    font-size: 22px;
+}
+
+.section-title {
+    margin: 30px 0 15px;
+    color: #d8eaff;
 }
 
 .cases {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(155px, 1fr));
     gap: 15px;
-    max-width: 500px;
-    margin: auto;
 }
 
 .case {
-    background: linear-gradient(135deg, #1769df, #7635c9);
-    border: 3px solid #55baff;
-    color: white;
-    padding: 25px 5px;
-    border-radius: 18px;
-    font-size: 20px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: .3s;
+    background: linear-gradient(145deg, #1c3153, #10182c);
+    border: 1px solid #365982;
+    border-radius: 16px;
+    padding: 20px 10px;
+    text-align: center;
+    transition: .25s;
 }
 
 .case:hover {
-    transform: scale(1.07);
-    box-shadow: 0 0 20px #349cff;
-}
-
-.case:active {
-    transform: scale(.93);
-}
-
-.case:disabled {
-    background: #343b50;
-    border-color: #555;
-    cursor: not-allowed;
-    transform: none;
-    box-shadow: none;
+    transform: translateY(-5px);
+    border-color: var(--blue);
+    box-shadow: 0 0 22px #00aaff44;
 }
 
 .chest {
-    font-size: 45px;
-    display: block;
-    margin-bottom: 10px;
+    font-size: 55px;
+    margin: 10px;
+    filter: drop-shadow(0 0 10px #00b7ff66);
 }
 
-#result {
-    background: #202d4d;
-    border: 2px solid #4c6ca7;
+.case h3 {
+    font-family: 'Russo One', sans-serif;
+    font-size: 15px;
+}
+
+.case p {
+    color: #9bb5d6;
+    font-size: 13px;
+}
+
+button {
+    border: 0;
+    cursor: pointer;
+    color: white;
+    font-family: inherit;
+    font-weight: 900;
+    border-radius: 9px;
+    padding: 12px 15px;
+    background: linear-gradient(100deg, #087ee8, #00bfff);
+    transition: .2s;
+}
+
+button:hover {
+    filter: brightness(1.2);
+    transform: scale(1.03);
+}
+
+button:disabled {
+    opacity: .45;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.case button {
+    width: 100%;
+    margin-top: 8px;
+}
+
+.purple {
+    background: linear-gradient(100deg, #7435d5, #b04cff);
+}
+
+.gold {
+    background: linear-gradient(100deg, #d58a00, #ffcc35);
+    color: #201600;
+}
+
+.gray {
+    background: #35445b;
+}
+
+.result {
+    background: linear-gradient(145deg, #17294a, #10182b);
+    border: 1px solid #35618e;
     border-radius: 18px;
-    padding: 25px;
-    max-width: 500px;
-    margin: 25px auto;
-    min-height: 150px;
+    padding: 25px 12px;
+    text-align: center;
+    margin-top: 25px;
+    min-height: 210px;
+    overflow: hidden;
+}
+
+.result-icon {
+    font-size: 65px;
+    margin: 10px;
+}
+
+.result-name {
+    font-family: 'Russo One', sans-serif;
+    font-size: 22px;
+}
+
+.result-message {
+    color: #9bb5d6;
+}
+
+.rolling {
+    animation: shake .12s infinite alternate;
+}
+
+@keyframes shake {
+    from { transform: translateY(-4px); }
+    to { transform: translateY(4px); }
+}
+
+.rarity-common { color: #bdc8d8; }
+.rarity-rare { color: #42a5ff; }
+.rarity-epic { color: #c477ff; }
+.rarity-legendary { color: #ffbb35; }
+.rarity-mythic {
+    color: #ff5555;
+    text-shadow: 0 0 15px red;
+}
+
+.inventory {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 12px;
 }
 
 .item {
-    font-size: 65px;
-    animation: appear .7s ease;
+    padding: 15px 10px;
+    background: var(--panel);
+    border: 1px solid #29466b;
+    border-radius: 12px;
+    text-align: center;
 }
 
-@keyframes appear {
-    from {
-        transform: scale(0) rotate(180deg);
-        opacity: 0;
-    }
-    to {
-        transform: scale(1) rotate(0);
-        opacity: 1;
-    }
+.item-icon {
+    font-size: 35px;
+    margin: 8px;
+}
+
+.item-name {
+    font-size: 13px;
+    font-weight: 900;
+    margin: 8px 0;
+}
+
+.item-price {
+    color: #ffd35b;
+    font-size: 13px;
+    margin: 8px;
+}
+
+.item button {
+    width: 100%;
+    padding: 9px;
+    font-size: 12px;
+}
+
+.panel {
+    background: var(--panel);
+    border: 1px solid #29466b;
+    border-radius: 15px;
+    padding: 18px;
+    margin-top: 20px;
+}
+
+.panel p {
+    color: #a5bbd5;
+    line-height: 1.6;
+}
+
+.empty {
+    text-align: center;
+    color: #8199b9;
+    padding: 25px;
+    background: #101a2e;
+    border-radius: 12px;
+}
+
+footer {
+    text-align: center;
+    color: #607c9d;
+    padding: 30px 10px;
+    font-size: 12px;
 }
 
 .token {
-    color: gold;
-    text-shadow: 0 0 20px gold;
+    animation: glow 1s infinite alternate;
 }
 
-.stats, .inventory {
-    background: #202d4d;
-    padding: 15px;
-    border-radius: 15px;
-    max-width: 500px;
-    margin: 15px auto;
+@keyframes glow {
+    from { text-shadow: 0 0 5px gold; }
+    to { text-shadow: 0 0 25px gold, 0 0 40px orange; }
 }
 
-.reset {
-    background: #e33c4f;
-    color: white;
-    border: none;
-    padding: 15px 25px;
-    border-radius: 10px;
-    font-size: 17px;
-    cursor: pointer;
+@media(max-width: 500px) {
+    .stats { gap: 6px; }
+    .stat { padding: 12px 4px; }
+    .stat strong { font-size: 17px; }
+    .container { width: 95%; }
+    h2 { font-size: 19px; }
 }
 </style>
 </head>
 
 <body>
 
-<h1>🔥 FORTNITE CASE 🔥</h1>
+<header>
+    <div class="logo">FORTNITE <span>CASE</span></div>
+    <div class="subtitle">OPEN YOUR LUCK • SEASON 2.0</div>
+</header>
 
-<div class="odds">
-    <h2>🎯 ШАНСЫ ВЫПАДЕНИЯ</h2>
-    <p>🏆 Жетон — 1.24 (вес)</p>
-    <p>🔫 Калаш — 27 (вес)</p>
-    <p>🔫 Пистолет — 38 (вес)</p>
-    <p>🗑️ Мусор — 50 (вес)</p>
-    <small>Вероятности автоматически нормализованы до 100%.</small>
-</div>
+<main class="container">
 
-<div class="cases">
+    <div class="stats">
+        <div class="stat">
+            <small>🪙 БАЛАНС</small>
+            <strong id="balance">1000</strong>
+        </div>
+        <div class="stat">
+            <small>🎁 ОТКРЫТО</small>
+            <strong id="opened">0</strong>
+        </div>
+        <div class="stat">
+            <small>🏆 ЖЕТОНЫ</small>
+            <strong id="tokens">0</strong>
+        </div>
+    </div>
 
-<button class="case" onclick="openCase(0)">
-    <span class="chest">🎁</span>
-    CASE 1
-</button>
+    <h2 class="section-title">🎁 ВЫБЕРИ КЕЙС</h2>
 
-<button class="case" onclick="openCase(1)">
-    <span class="chest">🎁</span>
-    CASE 2
-</button>
+    <div class="cases" id="cases"></div>
 
-<button class="case" onclick="openCase(2)">
-    <span class="chest">🎁</span>
-    CASE 3
-</button>
+    <div class="result" id="result">
+        <div class="result-icon">🎁</div>
+        <h2>ГОТОВ К ОТКРЫТИЮ?</h2>
+        <p class="result-message">Выбери кейс и испытай удачу!</p>
+    </div>
 
-<button class="case" onclick="openCase(3)">
-    <span class="chest">🎁</span>
-    CASE 4
-</button>
+    <h2 class="section-title">🎒 МОЙ ИНВЕНТАРЬ</h2>
+    <div class="inventory" id="inventory"></div>
 
-<button class="case" onclick="openCase(4)">
-    <span class="chest">🎁</span>
-    CASE 5
-</button>
+    <div class="panel">
+        <h2>🛒 МАГАЗИН</h2>
+        <p>Получай игровые монеты и открывай ещё больше кейсов!</p>
+        <button class="gold" onclick="dailyBonus()" id="dailyButton">
+            🎁 ЗАБРАТЬ ЕЖЕДНЕВНЫЙ БОНУС
+        </button>
+        <p id="dailyMessage"></p>
+    </div>
 
-</div>
+    <div class="panel">
+        <h2>📊 СТАТИСТИКА</h2>
+        <p>🔫 Калаши: <b id="kalash">0</b></p>
+        <p>🔫 Пистолеты: <b id="pistols">0</b></p>
+        <p>🗑️ Мусор: <b id="trash">0</b></p>
+        <p>💰 Всего заработано: <b id="earned">0</b></p>
+    </div>
 
-<div id="result">
-    <div class="item">🎁</div>
-    <h2>Выбери кейс!</h2>
-    <p>Попробуй найти редкий жетон Fortnite!</p>
-</div>
+    <div class="panel">
+        <h2>⚙️ НАСТРОЙКИ</h2>
+        <button class="gray" onclick="toggleSound()" id="soundButton">
+            🔊 ЗВУК ВКЛЮЧЁН
+        </button>
+        <button class="gray" onclick="restart()">🔄 СБРОСИТЬ ИГРУ</button>
+    </div>
 
-<div class="stats">
-    <h3>📊 СТАТИСТИКА</h3>
-    <p>Открыто кейсов: <b id="opened">0</b>/5</p>
-    <p>🏆 Жетоны: <b id="tokens">0</b></p>
-    <p>🔫 Калаши: <b id="kalash">0</b></p>
-    <p>🔫 Пистолеты: <b id="pistols">0</b></p>
-    <p>🗑️ Мусор: <b id="trash">0</b></p>
-</div>
+</main>
 
-<div class="inventory">
-    <h2>🎒 ИНВЕНТАРЬ</h2>
-    <div id="inventory">Пока пусто</div>
-</div>
-
-<br>
-
-<button class="reset" onclick="restart()">
-    🔄 НОВАЯ ИГРА
-</button>
+<footer>
+    FORTNITE CASE 2.0 • FAN-MADE GAME
+    <br><br>
+    Неофициальный фанатский проект. Не связан с Epic Games.
+</footer>
 
 <script>
 
-// Количество открытых кейсов
-let opened = 0;
+// ==============================
+// ИГРОВЫЕ ДАННЫЕ
+// ==============================
 
-// Счётчики предметов
-let tokens = 0;
-let kalash = 0;
-let pistols = 0;
-let trash = 0;
+const defaultData = {
+    balance: 1000,
+    opened: 0,
+    tokens: 0,
+    kalash: 0,
+    pistols: 0,
+    trash: 0,
+    earned: 0,
+    inventory: [],
+    lastBonus: ""
+};
 
-// Инвентарь
-let inventory = [];
+let data = loadData();
+let busy = false;
+let soundEnabled = true;
+let audio = null;
 
-// Предметы и их веса
-let rewards = [
+function loadData() {
+    try {
+        const saved = JSON.parse(localStorage.getItem("fortniteCase2"));
+        if (saved && typeof saved === "object") {
+            return {...defaultData, ...saved};
+        }
+    } catch(e) {}
+    return {...defaultData};
+}
+
+function saveData() {
+    localStorage.setItem("fortniteCase2", JSON.stringify(data));
+}
+
+// ==============================
+// ЗВУКИ
+// ==============================
+
+function playSound(type) {
+    if (!soundEnabled) return;
+
+    const AudioCtx = window.AudioContext || window.webkitAudioContext;
+    if (!AudioCtx) return;
+
+    if (!audio) audio = new AudioCtx();
+
+    if (audio.state === "suspended") audio.resume();
+
+    const notes = {
+        open: [250, 350, 450],
+        roll: [300],
+        common: [400],
+        rare: [500, 700],
+        epic: [600, 850, 1100],
+        legendary: [700, 1000, 1400],
+        mythic: [500, 900, 1300, 1700],
+        sell: [500, 650],
+        bonus: [600, 900, 1200]
+    };
+
+    if (!notes[type]) return;
+
+    notes[type].forEach((freq, i) => {
+        const osc = audio.createOscillator();
+        const gain = audio.createGain();
+
+        osc.type = "sine";
+        osc.frequency.value = freq;
+
+        osc.connect(gain);
+        gain.connect(audio.destination);
+
+        const start = audio.currentTime + i * 0.11;
+
+        gain.gain.setValueAtTime(0.09, start);
+        gain.gain.exponentialRampToValueAtTime(0.001, start + 0.24);
+
+        osc.start(start);
+        osc.stop(start + 0.25);
+    });
+}
+
+function toggleSound() {
+    soundEnabled = !soundEnabled;
+
+    document.getElementById("soundButton").innerText =
+        soundEnabled ? "🔊 ЗВУК ВКЛЮЧЁН" : "🔇 ЗВУК ВЫКЛЮЧЕН";
+
+    if (soundEnabled) playSound("bonus");
+}
+
+// ==============================
+// КЕЙСЫ И ПРЕДМЕТЫ
+// ==============================
+
+const cases = [
     {
-        name: "ЖЕТОН FORTNITE",
-        icon: "🏆",
-        weight: 1.24
+        id: "starter",
+        name: "STARTER CASE",
+        icon: "🎁",
+        price: 100,
+        color: "",
+        rewards: [
+            {name:"Мусор",icon:"🗑️",rarity:"common",weight:55,value:10},
+            {name:"Пистолет",icon:"🔫",rarity:"common",weight:28,value:35},
+            {name:"Калаш",icon:"🔫",rarity:"rare",weight:14,value:90},
+            {name:"Жетон Fortnite",icon:"🏆",rarity:"legendary",weight:3,value:300}
+        ]
     },
     {
-        name: "КАЛАШ",
-        icon: "🔫",
-        weight: 27
+        id: "battle",
+        name: "BATTLE CASE",
+        icon: "⚔️",
+        price: 200,
+        rewards: [
+            {name:"Мусор",icon:"🗑️",rarity:"common",weight:40,value:15},
+            {name:"Пистолет",icon:"🔫",rarity:"rare",weight:30,value:55},
+            {name:"Калаш",icon:"🔫",rarity:"epic",weight:22,value:120},
+            {name:"Золотой жетон",icon:"🏆",rarity:"legendary",weight:8,value:450}
+        ]
     },
     {
-        name: "ПИСТОЛЕТ",
-        icon: "🔫",
-        weight: 38
+        id: "epic",
+        name: "EPIC CASE",
+        icon: "💜",
+        price: 350,
+        rewards: [
+            {name:"Пистолет",icon:"🔫",rarity:"common",weight:30,value:40},
+            {name:"Калаш",icon:"🔫",rarity:"rare",weight:35,value:130},
+            {name:"Кристалл",icon:"💎",rarity:"epic",weight:25,value:250},
+            {name:"Легендарный жетон",icon:"🏆",rarity:"legendary",weight:10,value:700}
+        ]
     },
     {
-        name: "МУСОР",
-        icon: "🗑️",
-        weight: 50
+        id: "legend",
+        name: "LEGEND CASE",
+        icon: "👑",
+        price: 500,
+        rewards: [
+            {name:"Калаш",icon:"🔫",rarity:"rare",weight:35,value:150},
+            {name:"Кристалл",icon:"💎",rarity:"epic",weight:35,value:300},
+            {name:"Золотой жетон",icon:"🏆",rarity:"legendary",weight:25,value:800},
+            {name:"Мифический трофей",icon:"👑",rarity:"mythic",weight:5,value:2000}
+        ]
+    },
+    {
+        id: "mythic",
+        name: "MYTHIC CASE",
+        icon: "🔥",
+        price: 800,
+        rewards: [
+            {name:"Кристалл",icon:"💎",rarity:"rare",weight:35,value:300},
+            {name:"Золотой жетон",icon:"🏆",rarity:"epic",weight:35,value:800},
+            {name:"Мифический трофей",icon:"👑",rarity:"mythic",weight:20,value:2000},
+            {name:"Корона Fortnite",icon:"👑",rarity:"mythic",weight:10,value:3500}
+        ]
     }
 ];
 
-// Функция случайного выпадения
-function getReward() {
+// ==============================
+// ОТОБРАЖЕНИЕ КЕЙСОВ
+// ==============================
 
-    let total = 0;
+function renderCases() {
+    document.getElementById("cases").innerHTML = cases.map(c => `
+        <div class="case">
+            <div class="chest">${c.icon}</div>
+            <h3>${c.name}</h3>
+            <p>Цена: 🪙 ${c.price}</p>
+            <button onclick="openCase('${c.id}')" ${busy ? "disabled" : ""}>
+                ОТКРЫТЬ КЕЙС
+            </button>
+        </div>
+    `).join("");
+}
 
-    rewards.forEach(item => {
-        total += item.weight;
-    });
+// ==============================
+// СЛУЧАЙНЫЙ ПРЕДМЕТ
+// ==============================
 
+function getReward(c) {
+    const total = c.rewards.reduce((sum, item) => sum + item.weight, 0);
     let random = Math.random() * total;
 
-    for (let item of rewards) {
-
+    for (const item of c.rewards) {
         random -= item.weight;
-
-        if (random < 0) {
-            return item;
-        }
-
+        if (random < 0) return {...item};
     }
 
+    return {...c.rewards[0]};
 }
 
-// Открытие кейса
-function openCase(number) {
+// ==============================
+// ОТКРЫТИЕ КЕЙСА
+// ==============================
 
-    let buttons = document.querySelectorAll(".case");
-    let button = buttons[number];
+function openCase(id) {
+    if (busy) return;
 
-    // Если кейс уже открыт, ничего не делаем
-    if (button.disabled) return;
+    const c = cases.find(item => item.id === id);
+    if (!c) return;
 
-    // Закрываем возможность повторного открытия
-    button.disabled = true;
+    if (data.balance < c.price) {
+        document.getElementById("result").innerHTML = `
+            <div class="result-icon">💸</div>
+            <h2>НЕ ХВАТАЕТ МОНЕТ!</h2>
+            <p class="result-message">Забери ежедневный бонус или продай предметы.</p>
+        `;
+        playSound("common");
+        return;
+    }
 
-    opened++;
+    data.balance -= c.price;
+    busy = true;
 
-    document.getElementById("opened").innerText = opened;
+    renderCases();
+    updateUI();
 
-    // Анимация открытия
-    document.getElementById("result").innerHTML = `
-        <div class="item">🎁</div>
+    playSound("open");
+
+    const result = document.getElementById("result");
+
+    result.innerHTML = `
+        <div class="result-icon rolling">🎁</div>
         <h2>ОТКРЫВАЕМ КЕЙС...</h2>
-        <p>Ищем предмет...</p>
+        <p class="result-message">Ищем твой приз!</p>
     `;
 
-    setTimeout(function() {
+    let count = 0;
 
-        // Выбираем случайный предмет
-        let item = getReward();
+    const animation = setInterval(() => {
+        const randomItem = c.rewards[Math.floor(Math.random() * c.rewards.length)];
 
-        // Добавляем предмет в инвентарь
-        inventory.push(item);
-
-        // Проверяем, что выпало
-        if (item.name === "ЖЕТОН FORTNITE") {
-
-            tokens++;
-
-        } else if (item.name === "КАЛАШ") {
-
-            kalash++;
-
-        } else if (item.name === "ПИСТОЛЕТ") {
-
-            pistols++;
-
-        } else {
-
-            trash++;
-
-        }
-
-        // Обновляем счётчики
-        updateStats();
-
-        // Показываем предмет
-        let special = item.name === "ЖЕТОН FORTNITE";
-
-        document.getElementById("result").innerHTML = `
-            <div class="item ${special ? 'token' : ''}">
-                ${item.icon}
-            </div>
-
-            <h2 class="${special ? 'token' : ''}">
-                ${item.name}
-            </h2>
-
-            <p>
-                ${special
-                ? "🎉 НЕВЕРОЯТНО! ТЫ НАШЁЛ ЖЕТОН!"
-                : "Предмет выпал из кейса!"}
-            </p>
+        result.innerHTML = `
+            <div class="result-icon rolling">${randomItem.icon}</div>
+            <h2>${randomItem.name}</h2>
+            <p class="result-message">ПРЕДМЕТЫ ПРОКРУЧИВАЮТСЯ...</p>
         `;
 
-        // Меняем кнопку
-        button.innerHTML = "🔒<br>ОТКРЫТ";
+        playSound("roll");
+        count++;
 
-        // Все пять кейсов открыты
-        if (opened === 5) {
+        if (count >= 15) {
+            clearInterval(animation);
 
-            setTimeout(function() {
-
-                alert(
-                    "ИГРА ЗАВЕРШЕНА!\n" +
-                    "Жетонов найдено: " + tokens
-                );
-
-            }, 500);
-
+            setTimeout(() => finishOpening(c), 250);
         }
-
-    }, 1200);
-
+    }, 130);
 }
 
-// Обновление статистики и инвентаря
-function updateStats() {
+function finishOpening(c) {
+    const item = getReward(c);
 
-    document.getElementById("tokens").innerText = tokens;
-    document.getElementById("kalash").innerText = kalash;
-    document.getElementById("pistols").innerText = pistols;
-    document.getElementById("trash").innerText = trash;
+    item.uid = Date.now() + Math.random();
 
-    document.getElementById("inventory").innerHTML =
-        inventory.map(item =>
-            item.icon + " " + item.name
-        ).join("<br>");
+    data.inventory.push(item);
+    data.opened++;
+
+    if (item.name.toLowerCase().includes("жетон") ||
+        item.name === "Корона Fortnite") {
+        data.tokens++;
+    }
+
+    if (item.name === "Калаш") data.kalash++;
+    if (item.name === "Пистолет") data.pistols++;
+    if (item.name === "Мусор") data.trash++;
+
+    const sounds = {
+        common: "common",
+        rare: "rare",
+        epic: "epic",
+        legendary: "legendary",
+        mythic: "mythic"
+    };
+
+    playSound(sounds[item.rarity] || "common");
+
+    const result = document.getElementById("result");
+
+    result.innerHTML = `
+        <div class="result-icon token">${item.icon}</div>
+        <h2 class="rarity-${item.rarity}">${item.name}</h2>
+        <p class="result-message">🎉 ПРЕДМЕТ ВЫПАЛ ИЗ КЕЙСА!</p>
+        <p>Редкость: <b class="rarity-${item.rarity}">${item.rarity.toUpperCase()}</b></p>
+        <p>Стоимость продажи: 🪙 ${item.value}</p>
+    `;
+
+    busy = false;
+
+    saveData();
+    updateUI();
 }
 
-// Перезапуск игры
+// ==============================
+// ИНВЕНТАРЬ
+// ==============================
+
+function renderInventory() {
+    const box = document.getElementById("inventory");
+
+    if (data.inventory.length === 0) {
+        box.innerHTML = `
+            <div class="empty">
+                🎒 Инвентарь пуст.<br><br>
+                Открой свой первый кейс!
+            </div>
+        `;
+        return;
+    }
+
+    box.innerHTML = data.inventory.map(item => `
+        <div class="item">
+            <div class="item-icon">${item.icon}</div>
+            <div class="item-name rarity-${item.rarity}">${item.name}</div>
+            <div class="item-price">🪙 ${item.value}</div>
+            <button class="gold" onclick="sellItem(${item.uid})">
+                ПРОДАТЬ
+            </button>
+        </div>
+    `).join("");
+}
+
+// ==============================
+// ПРОДАЖА ПРЕДМЕТА
+// ==============================
+
+function sellItem(uid) {
+    if (busy) return;
+
+    const index = data.inventory.findIndex(item => item.uid == uid);
+    if (index === -1) return;
+
+    const item = data.inventory[index];
+
+    data.balance += item.value;
+    data.earned += item.value;
+
+    data.inventory.splice(index, 1);
+
+    playSound("sell");
+
+    saveData();
+    updateUI();
+}
+
+// ==============================
+// ЕЖЕДНЕВНЫЙ БОНУС
+// ==============================
+
+function dailyBonus() {
+    const today = new Date().toDateString();
+
+    if (data.lastBonus === today) {
+        document.getElementById("dailyMessage").innerText =
+            "Ты уже забрал бонус сегодня! Возвращайся завтра.";
+        return;
+    }
+
+    const reward = 500;
+
+    data.balance += reward;
+    data.lastBonus = today;
+
+    playSound("bonus");
+
+    document.getElementById("dailyMessage").innerText =
+        "🎉 Ты получил 500 монет!";
+
+    saveData();
+    updateUI();
+}
+
+// ==============================
+// ОБНОВЛЕНИЕ ИНТЕРФЕЙСА
+// ==============================
+
+function updateUI() {
+    document.getElementById("balance").innerText = data.balance;
+    document.getElementById("opened").innerText = data.opened;
+    document.getElementById("tokens").innerText = data.tokens;
+
+    document.getElementById("kalash").innerText = data.kalash;
+    document.getElementById("pistols").innerText = data.pistols;
+    document.getElementById("trash").innerText = data.trash;
+    document.getElementById("earned").innerText = data.earned;
+
+    document.getElementById("dailyButton").disabled =
+        data.lastBonus === new Date().toDateString();
+
+    renderInventory();
+    renderCases();
+
+    saveData();
+}
+
+// ==============================
+// ПЕРЕЗАПУСК
+// ==============================
+
 function restart() {
+    if (busy) return;
 
-    opened = 0;
-    tokens = 0;
-    kalash = 0;
-    pistols = 0;
-    trash = 0;
-    inventory = [];
+    if (!confirm("Ты точно хочешь удалить весь прогресс?")) return;
 
-    updateStats();
+    data = {...defaultData, inventory: []};
 
-    document.getElementById("opened").innerText = 0;
+    document.getElementById("result").innerHTML = `
+        <div class="result-icon">🎁</div>
+        <h2>ИГРА НАЧАЛАСЬ ЗАНОВО!</h2>
+        <p class="result-message">Удачи в поиске редких предметов!</p>
+    `;
 
-    document.getElementById("result").innerHTML =
-        "<div class='item'>🎁</div>" +
-        "<h2>Выбери кейс!</h2>" +
-        "<p>Найди редкий жетон!</p>";
-
-    document.querySelectorAll(".case").forEach(
-        (button, index) => {
-            button.disabled = false;
-            button.innerHTML =
-                '<span class="chest">🎁</span>CASE ' +
-                (index + 1);
-        }
-    );
-
+    saveData();
+    updateUI();
 }
+
+// ==============================
+// ЗАПУСК ИГРЫ
+// ==============================
+
+updateUI();
 
 </script>
 
 </body>
 </html>
+
