@@ -1,0 +1,394 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fortnite Case</title>
+
+<style>
+body {
+    background: #10152b;
+    color: white;
+    font-family: Arial;
+    text-align: center;
+    padding: 20px;
+}
+
+h1 {
+    color: gold;
+    font-size: 36px;
+}
+
+.odds {
+    background: #202d4d;
+    padding: 15px;
+    border-radius: 15px;
+    max-width: 500px;
+    margin: 20px auto;
+}
+
+.cases {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    max-width: 500px;
+    margin: auto;
+}
+
+.case {
+    background: linear-gradient(135deg, #1769df, #7635c9);
+    border: 3px solid #55baff;
+    color: white;
+    padding: 25px 5px;
+    border-radius: 18px;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.case:hover {
+    transform: scale(1.07);
+    box-shadow: 0 0 20px #349cff;
+}
+
+.case:active {
+    transform: scale(.93);
+}
+
+.case:disabled {
+    background: #343b50;
+    border-color: #555;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.chest {
+    font-size: 45px;
+    display: block;
+    margin-bottom: 10px;
+}
+
+#result {
+    background: #202d4d;
+    border: 2px solid #4c6ca7;
+    border-radius: 18px;
+    padding: 25px;
+    max-width: 500px;
+    margin: 25px auto;
+    min-height: 150px;
+}
+
+.item {
+    font-size: 65px;
+    animation: appear .7s ease;
+}
+
+@keyframes appear {
+    from {
+        transform: scale(0) rotate(180deg);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1) rotate(0);
+        opacity: 1;
+    }
+}
+
+.token {
+    color: gold;
+    text-shadow: 0 0 20px gold;
+}
+
+.stats, .inventory {
+    background: #202d4d;
+    padding: 15px;
+    border-radius: 15px;
+    max-width: 500px;
+    margin: 15px auto;
+}
+
+.reset {
+    background: #e33c4f;
+    color: white;
+    border: none;
+    padding: 15px 25px;
+    border-radius: 10px;
+    font-size: 17px;
+    cursor: pointer;
+}
+</style>
+</head>
+
+<body>
+
+<h1>🔥 FORTNITE CASE 🔥</h1>
+
+<div class="odds">
+    <h2>🎯 ШАНСЫ ВЫПАДЕНИЯ</h2>
+    <p>🏆 Жетон — 1.24 (вес)</p>
+    <p>🔫 Калаш — 27 (вес)</p>
+    <p>🔫 Пистолет — 38 (вес)</p>
+    <p>🗑️ Мусор — 50 (вес)</p>
+    <small>Вероятности автоматически нормализованы до 100%.</small>
+</div>
+
+<div class="cases">
+
+<button class="case" onclick="openCase(0)">
+    <span class="chest">🎁</span>
+    CASE 1
+</button>
+
+<button class="case" onclick="openCase(1)">
+    <span class="chest">🎁</span>
+    CASE 2
+</button>
+
+<button class="case" onclick="openCase(2)">
+    <span class="chest">🎁</span>
+    CASE 3
+</button>
+
+<button class="case" onclick="openCase(3)">
+    <span class="chest">🎁</span>
+    CASE 4
+</button>
+
+<button class="case" onclick="openCase(4)">
+    <span class="chest">🎁</span>
+    CASE 5
+</button>
+
+</div>
+
+<div id="result">
+    <div class="item">🎁</div>
+    <h2>Выбери кейс!</h2>
+    <p>Попробуй найти редкий жетон Fortnite!</p>
+</div>
+
+<div class="stats">
+    <h3>📊 СТАТИСТИКА</h3>
+    <p>Открыто кейсов: <b id="opened">0</b>/5</p>
+    <p>🏆 Жетоны: <b id="tokens">0</b></p>
+    <p>🔫 Калаши: <b id="kalash">0</b></p>
+    <p>🔫 Пистолеты: <b id="pistols">0</b></p>
+    <p>🗑️ Мусор: <b id="trash">0</b></p>
+</div>
+
+<div class="inventory">
+    <h2>🎒 ИНВЕНТАРЬ</h2>
+    <div id="inventory">Пока пусто</div>
+</div>
+
+<br>
+
+<button class="reset" onclick="restart()">
+    🔄 НОВАЯ ИГРА
+</button>
+
+<script>
+
+// Количество открытых кейсов
+let opened = 0;
+
+// Счётчики предметов
+let tokens = 0;
+let kalash = 0;
+let pistols = 0;
+let trash = 0;
+
+// Инвентарь
+let inventory = [];
+
+// Предметы и их веса
+let rewards = [
+    {
+        name: "ЖЕТОН FORTNITE",
+        icon: "🏆",
+        weight: 1.24
+    },
+    {
+        name: "КАЛАШ",
+        icon: "🔫",
+        weight: 27
+    },
+    {
+        name: "ПИСТОЛЕТ",
+        icon: "🔫",
+        weight: 38
+    },
+    {
+        name: "МУСОР",
+        icon: "🗑️",
+        weight: 50
+    }
+];
+
+// Функция случайного выпадения
+function getReward() {
+
+    let total = 0;
+
+    rewards.forEach(item => {
+        total += item.weight;
+    });
+
+    let random = Math.random() * total;
+
+    for (let item of rewards) {
+
+        random -= item.weight;
+
+        if (random < 0) {
+            return item;
+        }
+
+    }
+
+}
+
+// Открытие кейса
+function openCase(number) {
+
+    let buttons = document.querySelectorAll(".case");
+    let button = buttons[number];
+
+    // Если кейс уже открыт, ничего не делаем
+    if (button.disabled) return;
+
+    // Закрываем возможность повторного открытия
+    button.disabled = true;
+
+    opened++;
+
+    document.getElementById("opened").innerText = opened;
+
+    // Анимация открытия
+    document.getElementById("result").innerHTML = `
+        <div class="item">🎁</div>
+        <h2>ОТКРЫВАЕМ КЕЙС...</h2>
+        <p>Ищем предмет...</p>
+    `;
+
+    setTimeout(function() {
+
+        // Выбираем случайный предмет
+        let item = getReward();
+
+        // Добавляем предмет в инвентарь
+        inventory.push(item);
+
+        // Проверяем, что выпало
+        if (item.name === "ЖЕТОН FORTNITE") {
+
+            tokens++;
+
+        } else if (item.name === "КАЛАШ") {
+
+            kalash++;
+
+        } else if (item.name === "ПИСТОЛЕТ") {
+
+            pistols++;
+
+        } else {
+
+            trash++;
+
+        }
+
+        // Обновляем счётчики
+        updateStats();
+
+        // Показываем предмет
+        let special = item.name === "ЖЕТОН FORTNITE";
+
+        document.getElementById("result").innerHTML = `
+            <div class="item ${special ? 'token' : ''}">
+                ${item.icon}
+            </div>
+
+            <h2 class="${special ? 'token' : ''}">
+                ${item.name}
+            </h2>
+
+            <p>
+                ${special
+                ? "🎉 НЕВЕРОЯТНО! ТЫ НАШЁЛ ЖЕТОН!"
+                : "Предмет выпал из кейса!"}
+            </p>
+        `;
+
+        // Меняем кнопку
+        button.innerHTML = "🔒<br>ОТКРЫТ";
+
+        // Все пять кейсов открыты
+        if (opened === 5) {
+
+            setTimeout(function() {
+
+                alert(
+                    "ИГРА ЗАВЕРШЕНА!\n" +
+                    "Жетонов найдено: " + tokens
+                );
+
+            }, 500);
+
+        }
+
+    }, 1200);
+
+}
+
+// Обновление статистики и инвентаря
+function updateStats() {
+
+    document.getElementById("tokens").innerText = tokens;
+    document.getElementById("kalash").innerText = kalash;
+    document.getElementById("pistols").innerText = pistols;
+    document.getElementById("trash").innerText = trash;
+
+    document.getElementById("inventory").innerHTML =
+        inventory.map(item =>
+            item.icon + " " + item.name
+        ).join("<br>");
+}
+
+// Перезапуск игры
+function restart() {
+
+    opened = 0;
+    tokens = 0;
+    kalash = 0;
+    pistols = 0;
+    trash = 0;
+    inventory = [];
+
+    updateStats();
+
+    document.getElementById("opened").innerText = 0;
+
+    document.getElementById("result").innerHTML =
+        "<div class='item'>🎁</div>" +
+        "<h2>Выбери кейс!</h2>" +
+        "<p>Найди редкий жетон!</p>";
+
+    document.querySelectorAll(".case").forEach(
+        (button, index) => {
+            button.disabled = false;
+            button.innerHTML =
+                '<span class="chest">🎁</span>CASE ' +
+                (index + 1);
+        }
+    );
+
+}
+
+</script>
+
+</body>
+</html>
